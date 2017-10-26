@@ -1,6 +1,5 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * 配置文件
  *
@@ -11,11 +10,11 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  * @release        2017.10.10
  */
 
-//服务器域名，正式环境主机名称，不带http
+// 服务器域名，正式环境主机名称，不带http
 define('SERVER_NAME', "www.test.com");
-//web服务器地址
+// web服务器地址
 define('WEB_SERVER', 'http://' . SERVER_NAME);
-//静态文件css/img/js服务器地址
+// 静态文件css/img/js服务器地址
 define('STATIC_SERVER', '/static');
 
 // 加载数据库配置
