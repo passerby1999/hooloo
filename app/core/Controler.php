@@ -7,7 +7,7 @@
  * @version        1.2
  * @release        2017.10.10
  */
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Controller 
 {

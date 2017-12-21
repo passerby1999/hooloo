@@ -2,13 +2,12 @@
 /**
  * 数据库连接类
  *
- * @package        Hooloo framework
- * @author         Bill, Passerby
- * @copyright      Hooloo Team
+ * @package        Hooloo Framework
+ * @author         Passerby, Bill
  * @version        1.2
  * @release        2017.10.27
  */
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Database
 {
@@ -16,10 +15,10 @@ class Database
     private $db_result;
     
     // 连接数据库
-    public function connect($address, $username, $password, $db_name)
+    public function connect($address, $username, $password, $db_name, $charset = 'utf8')
     {
         $this->db_handle = new mysqli($address, $username, $password, $db_name);
-        $this->db_handle->set_charset('utf8');
+        $this->db_handle->set_charset($charset);
     }
     
     // 自定义SQL查询语句

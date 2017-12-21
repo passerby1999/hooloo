@@ -1,18 +1,17 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * 配置文件
  *
- * @package        Hooloo framework
+ * @package        Hooloo Framework
  * @author         Passerby
- * @copyright      Hooloo Team
  * @version        1.2
  * @release        2017.10.10
  */
+if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 // 服务器域名，正式环境主机名称，不带http
 define('SERVER_NAME', "www.test.com");
-// web服务器地址
+// WEB服务器地址
 define('WEB_SERVER', 'http://' . SERVER_NAME);
 // 静态文件css/img/js服务器地址
 define('STATIC_SERVER', '/static');
