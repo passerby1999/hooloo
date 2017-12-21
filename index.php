@@ -27,31 +27,24 @@
                                                  
 
  *
- * @package        Hooloo framework
+ * @package        Hooloo Framework
  * @author         Passerby
- * @copyright      Hooloo Team
- * @version        1.2
- * @release        2017.10.10
+ * @version        1.2.2
+ * @release        2017.12.21
  */
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 
-// 授权域名访问 
-$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
-if ($origin && strstr($origin, SERVER_NAME)) {
-    header('Access-Control-Allow-Origin:' . $origin);       
-}
-
 // 设置时区
 ini_set('date.timezone', 'Asia/Shanghai');
 
-// 页面开始执行时间
+// 记录页面开始执行时间
 define('BEGINTIME', microtime(true));
 
 // 网站根路径
 define('BASEPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-// 应用路径
+// 应用程序路径
 define('APPPATH', BASEPATH . 'app' . DIRECTORY_SEPARATOR);
 
 // 错误日志目录
@@ -61,14 +54,14 @@ define('SESSION_SAVE_PATHS', BASEPATH . 'data/session');
 // 缓存目录
 define('CACHE_PATH', BASEPATH . 'data/cache');
 
-// 模板引擎编译文件输出路径
+// 模板引擎编译文件输出目录
 define('TPL_COMPILE_PATH', BASEPATH . 'data/runtime');
-// 变量界定符左
+// 模板变量左侧界定符
 define('TPL_LEFT_SEPERATOR', '<{');
-// 变量界定符右
+// 模板变量右侧界定符
 define('TPL_RIGHT_SEPERATOR', '}>');
 
-// AJAX请求标志
+// 定义AJAX请求标志
 define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 define('IS_POST', strtolower($_SERVER['REQUEST_METHOD']) == 'post');
 define('IS_GET', strtolower($_SERVER['REQUEST_METHOD']) == 'get');
@@ -88,12 +81,25 @@ if (DEVELOPMENT_ENVIRONMENT == true) {
     error_reporting(E_ALL);
     ini_set('display_errors', 'On');
 } else {
-    // 正式环境记录错误到日志文件
+    // 正式环境不报告错误，但记录错误到日志文件
     error_reporting(E_ALL & ~E_NOTICE);
     ini_set('display_errors', 'On');
     ini_set('log_errors', 'On');
     ini_set('error_log', ERRLOG_PATH . '/error.log');
 }
 
-// 加载主文件
+// 忽略图片处理错误
+ini_set('gd.jpeg_ignore_warning', 1);
+
+// 加载配置文件
+require APPPATH . 'config/config.php';
+
+// 授权域名访问 
+$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
+if ($origin && strstr($origin, SERVER_NAME)) {
+    header('Access-Control-Allow-Origin:' . $origin);       
+}
+
+// 加载核心文件
 require APPPATH . 'core/kernel.php';
+call_hook();

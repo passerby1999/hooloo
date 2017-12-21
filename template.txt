@@ -1,0 +1,97 @@
+# 模板引擎用法说明
+
+一、控制器代码
+
+    1、变量赋值：
+    
+    $this->assign(‘key’, $val);
+    
+    2、显示页面：
+    
+    $this->display();           //缺省视图文件 controler/action
+    或 
+    $this->display(‘dir/file’); //指定视图文件
+
+二、模板语法
+
+    1.	输出变量
+
+        <{$var}> //建议界定符号为<{ }>，内侧可留也可不留空格（建议不留空格）。
+        
+        使用<{ }>的原因：一是可以与js代码中的{ }区分，不容易出错，二是更利于前端设计页面时候的预览，使用< >可以将代码标签化，不容易出现乱码。
+        
+        数组写法：
+        $var[a]或$var[“a”]，$var[‘a’]，$var.a，最多支持三维数组，如 $var[a][b][c]，$var.a.b.c
+
+    2.	输出执行函数
+    
+        <{strtolower($var)}>
+
+    3.	if判断语句
+    
+        <{if 1 == $a}> //条件不需要加括号
+            // your code...
+        <{elseif 2 == $a}>
+            // your code...
+        <{else}>
+            // your code...
+        <{/if}> //结束判断
+
+    4.	for循环语句
+    
+        <{for $i = 1 to 10 step 2}> //前两个参数均包含在条件内，等效于 for ($i = 1; $i <= 10; $i += 2) {}
+            // your code...
+        <{/for}>
+
+        或不指定步长，如：
+        
+        <{for $i = 1 to 10}> //没有step子句，默认步长为1，等效于 for ($i = 1; $i <= 10; $i++) {}
+            // your code... 
+        <{/for}>
+
+        如果是倒序，第三个参数可设置为负数：
+        
+        <{for $i = 10 to 1 step -1}>
+            // your code...
+        <{/for}>
+
+        循环参数也可以是变量，如：
+        
+        <{for $i = $j to $k step $m}>
+            // your code...
+        <{/for}>
+        
+    5.	foreach循环语句
+    
+        <{foreach $var as $k to $v}> //等效于foreach ($var as $k => $v) { }
+            // your code...
+        <{/foreach}>
+        
+        或
+        <{foreach $var as $v}> //等效于foreach ($var as $v) { }
+            // your code...
+        <{/foreach}>
+
+    6.	注释
+    
+        <{// 单行注释}>
+        
+        多行注释
+        <{/* 注释内容
+            ...
+            ...
+        */}>
+        
+        或 <{# 注释内容 #}>
+        
+    7.	包含文件
+    
+        <{include file=”dir/file.html”}>
+        或 
+        <{include file='dir/file.html'}>
+        或 
+        <{include file=dir/file.html}>
+
+        说明：
+        （1）如果更新了包含文件，编译文件不会自动重新编译，需手工删除runtime下已编译文件。
+        （2）文件名需填写包含扩展名的完整文件名。
