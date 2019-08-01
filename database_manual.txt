@@ -1,0 +1,36 @@
+MySQL数据库查询方法：
+        
+//连接数据库（默认使用配置1数据库）
+$this->init_db(1);
+
+//执行查询（使用原生sql语句）
+$sql = "select * from table limit 1";
+$query = $this->db->query($sql);
+
+//如不需返回结果
+$sql = "delete from table where id = 1";
+$this->db->query($sql);
+
+//获取结果集
+$res = $query->result_array();
+
+//获取单行结果集
+$res = $query->row_array();
+
+//获取最后插入id
+$res = $query->insert_id();
+
+//获取影响行数
+$res = $query->affected_rows();
+
+//开启事务
+$this->db->trans_begin();
+
+//回滚事务
+$this->db->trans_rollback();
+
+//提交事务
+$this->db->trans_commit();
+
+//关闭数据库连接
+$this->db->close();
