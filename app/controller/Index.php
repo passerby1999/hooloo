@@ -80,9 +80,9 @@ class Index extends Controller
         
         // 处理你的代码
         $res = [
-            'title' => 'Stray Bird';
-            'author' => 'Tagore';
-            'price' => '22.00';
+            'title' => 'Stray Bird',
+            'author' => 'Tagore',
+            'price' => '22.00',
         ];
         
         // 变量赋值
